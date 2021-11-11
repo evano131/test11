@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.telent.mapper.AdminMapper">
+    <select id="getAdminByName" resultMap="Admin">
+        SELECT * from talentpool_admin where admin_name = #{admin_name}
+    </select>
+
+    <resultMap id="Admin" type="com.telent.bean.po.Admin">
+        <id property="admin_id" column="admin_id"></id>
+        <result property="admin_name" column="admin_name"></result>
+        <result property="admin_pass" column="admin_pass"></result>
+        <result property="admin_email" column="admin_email"></result>
+        <result property="admin_status" column="admin_status"></result>
+        <result property="creator" column="creator"></result>
+        <result property="createtime" column="createtime"></result>
+        <result property="last_updatetime" column="last_updatetime"></result>
+        <result property="last_updatetime" column="last_updatetime"></result>
+        <result property="last_updater" column="last_updater"></result>
+
+
+        <collection property="roleList"
+                    ofType="com.telent.bean.po.Role"
+                    column="admin_id"
+                    select="com.telent.mapper.RoleMapper.getRoleListByAdminId"
+                    fetchType="lazy"></collection>
+    </resultMap>
+</mapper>
+    
